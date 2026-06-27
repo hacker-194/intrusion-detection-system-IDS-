@@ -29,7 +29,6 @@ except ImportError:
 
 logger = logging.getLogger("ids_core")
 
-# Mapping from CICFlowMeter column names to NFStream 6.x attribute names.
 CIC_TO_NFSTREAM: Dict[str, str] = {
     "Flow Duration": "bidirectional_duration_ms",
     "Total Fwd Packets": "src2dst_packets",
@@ -108,7 +107,6 @@ _NFSTREAM_COMPUTED: Dict[str, Any] = {
 
 
 def _stable_sigmoid(x):
-    """Numerically stable sigmoid, clipping to [-500, 500] to avoid overflow."""
     x = np.clip(np.asarray(x, dtype=np.float64), -500.0, 500.0)
     return 1.0 / (1.0 + np.exp(-x))
   
