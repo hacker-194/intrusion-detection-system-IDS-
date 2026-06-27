@@ -29,15 +29,46 @@ A real-time **AI-powered Intrusion Detection System (IDS)** that detects malicio
 
 ```text
 .
-├── main.py
-├── model.py
-├── capture_engine.py
+├── main.py                 # FastAPI application & endpoints
+├── config.py               # Settings + logging configuration
+├── auth.py                 # API key authentication
+├── rate_limit.py           # Sliding-window rate limiter
+├── schemas.py              # Pydantic request/response models
+├── capture_engine.py       # Scapy-based packet capture & flow tracking
+├── rule_detector.py        # Lightweight port scan / SYN flood / ICMP flood detection
+├── snort_parser.py         # Suricata/Snort EVE JSON log parser
+├── alert_db.py             # SQLite-backed alert history storage
+├── metrics.py              # MetricsCollector + Prometheus MetricsRecorder
+├── visualizer.py           # Real-time dashboard plotter
+│
+├── model.py                # Core ML module (Autoencoder, LightGBM, HybridIDS,
+│                           #   BackgroundRetrainer, data loaders, training CLI)
+│
+├── tests.py                # Unified test suite (API, concurrency, chaos)
+│
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # Multi-stage Docker build
+├── docker-compose.yml      # Full stack deployment (ids-api, suricata, prometheus, grafana)
+├── .env                    # Local dev config (git-ignored, see Configuration section)
+│
 ├── frontend/
-├── models/
-├── tests.py
-├── Dockerfile
-├── docker-compose.yml
-└── README.md
+│   ├── src/
+│   │   ├── App.jsx         # Router + page routes
+│   │   ├── pages/          # Dashboard, Predict, Alerts, Model, Capture, Metrics
+│   │   ├── components/     # MetricCard, StatusBadge, AlertFeedWidget, Sidebar, ApiKeyModal
+│   │   ├── hooks/          # useWebSocket (alert stream)
+│   │   └── utils/          # API client
+│   ├── package.json
+│   └── vite.config.js
+│
+├── suricata/
+│   └── logs/               # Suricata EVE JSON alert output (git-ignored)
+│
+├── models/                 # Trained model files (generated)
+├── captures/               # PCAP files for replay
+├── logs/                   # Alert SQLite database
+├── prometheus/             # Prometheus config
+└── grafana/                # Grafana provisioning
 ```
 
 ## 🚀 Getting Started
